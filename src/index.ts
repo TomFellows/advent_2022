@@ -1,13 +1,10 @@
-export function giveThanks(from: string) {
-  return `${from} fait dire : 'Merci Mercantile !'`;
-}
+import * as dotenv from 'dotenv';
+dotenv.config();
 
-giveThanks('Ronald');
-
-function enableWatchMode() {
-  setInterval(() => {}, 1 << 30);
-}
-
-if (process.env.WATCH) {
-  enableWatchMode();
+if (require.main === module) {
+  const day = process.argv[2];
+  require(`./${day}/index`).main().then(() => process.exit()).catch((e:any) => {
+    console.error(e);
+    process.exit(1);
+  });
 }
